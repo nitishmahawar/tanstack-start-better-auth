@@ -1,6 +1,6 @@
 import { UserMenu } from "./user-menu";
 
-export const Header = () => {
+export const Navbar = () => {
   return (
     <header className="h-16 px-4 flex items-center justify-between w-full border-b">
       <img
