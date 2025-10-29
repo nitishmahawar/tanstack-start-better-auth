@@ -1,18 +1,15 @@
 import { Spinner } from "@/components/ui/spinner";
-import { authClient } from "@/lib/auth-client";
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/(auth)")({
   component: RouteComponent,
-  beforeLoad: async () => {
-    const session = await authClient.getSession();
-    if (session.data?.user) {
+  beforeLoad: async ({ context }) => {
+    if (context.user) {
       throw redirect({
         to: "/",
       });
     }
   },
-  ssr: false,
   pendingComponent: () => {
     return (
       <div className="min-h-screen flex items-center justify-center">

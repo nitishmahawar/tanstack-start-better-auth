@@ -11,10 +11,22 @@ import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import appCss from "../styles.css?url";
 
 import type { QueryClient } from "@tanstack/react-query";
+import { createServerFn } from "@tanstack/react-start";
+import { auth } from "@/lib/auth";
+import { getRequestHeaders } from "@tanstack/react-start/server";
 
 interface MyRouterContext {
   queryClient: QueryClient;
 }
+
+const getSession = createServerFn({ method: "GET" }).handler(async () => {
+  const session = await auth.api.getSession({ headers: getRequestHeaders() });
+
+  return {
+    user: session?.user,
+    session: session?.session,
+  };
+});
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({
@@ -39,6 +51,14 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   }),
 
   shellComponent: RootDocument,
+  beforeLoad: async () => {
+    const data = await getSession();
+
+    return {
+      user: data.user,
+      session: data.session,
+    };
+  },
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
