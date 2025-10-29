@@ -14,6 +14,7 @@ import type { QueryClient } from "@tanstack/react-query";
 import { createServerFn } from "@tanstack/react-start";
 import { auth } from "@/lib/auth";
 import { getRequestHeaders } from "@tanstack/react-start/server";
+import { Toaster } from "@/components/ui/sonner";
 
 interface MyRouterContext {
   queryClient: QueryClient;
@@ -69,6 +70,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        <Toaster richColors theme="light" style={{ fontFamily: "Geist" }} />
         <TanStackDevtools
           config={{
             position: "bottom-right",
