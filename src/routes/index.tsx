@@ -1,5 +1,7 @@
 import { Navbar } from "@/components/navbar";
 import { ProfileCard } from "@/components/profile-card";
+import { TodoForm } from "@/components/todo-form";
+import { Todos } from "@/components/todos";
 import { createFileRoute, useRouteContext } from "@tanstack/react-router";
 import { redirect } from "@tanstack/react-router";
 
@@ -19,15 +21,12 @@ export const Route = createFileRoute("/")({
 });
 
 function App() {
-  const { user } = useRouteContext({ from: "/" });
-
-  console.log(user);
-
   return (
     <div className="min-h-screen">
       <Navbar />
-      <div className="p-4 flex items-center justify-center flex-1">
-        <ProfileCard />
+      <div className="px-4 py-6 flex items-center justify-center flex-col flex-1 space-y-6">
+        <TodoForm />
+        <Todos />
       </div>
     </div>
   );
