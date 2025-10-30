@@ -1,7 +1,7 @@
+import { CreateNoteDialog } from "@/components/create-note-dialog";
 import { Navbar } from "@/components/navbar";
-import { ProfileCard } from "@/components/profile-card";
-import { TodoForm } from "@/components/todo-form";
-import { Todos } from "@/components/todos";
+import { NotesList } from "@/components/notes-list";
+import { Button } from "@/components/ui/button";
 import { createFileRoute, useRouteContext } from "@tanstack/react-router";
 import { redirect } from "@tanstack/react-router";
 
@@ -24,9 +24,14 @@ function App() {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <div className="px-4 py-6 flex items-center justify-center flex-col flex-1 space-y-6">
-        <TodoForm />
-        <Todos />
+      <div className="py-4 px-4 sm:px-6 md:px-8 lg:px-12 space-y-6">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold">My Notes</h2>
+          <CreateNoteDialog>
+            <Button>Create New Note</Button>
+          </CreateNoteDialog>
+        </div>
+        <NotesList />
       </div>
     </div>
   );

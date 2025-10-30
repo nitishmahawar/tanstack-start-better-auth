@@ -1,5 +1,5 @@
-import { todosRouter } from "./todos";
+import { notesRouter } from "./notes";
 
 export default {
-  todos: todosRouter,
+  notes: notesRouter,
 };
